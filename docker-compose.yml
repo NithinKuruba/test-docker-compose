@@ -26,4 +26,4 @@ services:
     ports:
       - 9080:9080/tcp
     volumes:
-      - /tmp/app/local/keycloak/master-realm.json:/tmp/realm-config/master-realm.json
+      - ./local/keycloak/master-realm.json:/tmp/realm-config/master-realm.json
