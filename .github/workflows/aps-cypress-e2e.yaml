@@ -10,9 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: lucasalt/act_base:latest
-      options: -u root -w /app
+      options: -u root
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
+        - /__w/test-docker-compose/test-docker-compose:/tmp/app
     steps:
       - uses: actions/checkout@v1
       - name: Spin up API Services Portal and Run E2E Tests
