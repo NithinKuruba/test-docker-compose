@@ -1,19 +1,10 @@
 version: "3.8"
 
-x-common-variables: &common-variables
-  KONG_DATABASE: postgres
-  KONG_PG_DATABASE: kong
-  KONG_PG_HOST: kong-db
-  KONG_PG_USER: konguser
-  KONG_PG_PASSWORD: konguser
-
 services:
   keycloak:
     image: jboss/keycloak:11.0.3
     container_name: keycloak
     hostname: keycloak
-    depends_on:
-      - kong-db
     command:
       [
         "-b",
@@ -29,8 +20,3 @@ services:
       - 9080:9080/tcp
     volumes:
       - /__w/test-docker-compose/test-docker-compose/local/keycloak/master-realm.json:/tmp/realm-config/master-realm.json
-    networks:
-      keycloak:
-        aliases:
-          - keycloak.localtest.me
-      kong-net: {}
