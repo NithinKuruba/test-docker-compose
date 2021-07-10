@@ -28,7 +28,7 @@ services:
     ports:
       - 9080:9080/tcp
     volumes:
-      - ./local/keycloak/master-realm.json:/tmp/realm-config/master-realm.json
+      - /__w/test-docker-compose/test-docker-compose/local/keycloak/master-realm.json:/tmp/realm-config/master-realm.json
     networks:
       keycloak:
         aliases:

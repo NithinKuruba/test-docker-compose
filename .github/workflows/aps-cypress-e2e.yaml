@@ -18,6 +18,4 @@ jobs:
       - name: Spin up API Services Portal and Run E2E Tests
         run: |
           pwd
-          ls -lrta
-          cd local/keycloak
-          ls -lrta
+          docker-compose up
