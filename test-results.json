@@ -4,7 +4,7 @@
     "tests": 96,
     "passes": 96,
     "pending": 0,
-    "failures": 0,
+    "failures": 10,
     "start": "2022-02-11T19:21:48.605Z",
     "end": "2022-02-11T19:26:30.307Z",
     "duration": 183157,
@@ -1396,9 +1396,7 @@
             }
           ],
           "suites": [],
-          "passes": [
-            "fbdfc766-0024-40a8-9e52-a47cd0202687"
-          ],
+          "passes": ["fbdfc766-0024-40a8-9e52-a47cd0202687"],
           "failures": [],
           "pending": [],
           "skipped": [],
@@ -1608,9 +1606,7 @@
             }
           ],
           "suites": [],
-          "passes": [
-            "112cf935-371b-43f6-9d00-bf804c1c7bbb"
-          ],
+          "passes": ["112cf935-371b-43f6-9d00-bf804c1c7bbb"],
           "failures": [],
           "pending": [],
           "skipped": [],
@@ -1878,9 +1874,7 @@
             }
           ],
           "suites": [],
-          "passes": [
-            "24cacfe4-3711-42cf-b1b8-2038937c6cc5"
-          ],
+          "passes": ["24cacfe4-3711-42cf-b1b8-2038937c6cc5"],
           "failures": [],
           "pending": [],
           "skipped": [],
