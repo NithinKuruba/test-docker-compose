@@ -18,5 +18,7 @@ jobs:
           if [[ "$FAILURE_COUNT" -gt 0 ]]; then
             echo "Hello, the failure count is $FAILURE_COUNT"
             FAILED_TESTS=$(cat test-results.json | jq '.results | .[] | .suites | .[].tests | .[] | select(.fail==false) | .title')
-            gh issue create --title "FAILED: Automated Tests($FAILURE_COUNT)" --body "$FAILED_TESTS \n\n\n ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo -e "$FAILED_TESTS\n\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" > msg
+            export MSG=$(cat msg)
+            gh issue create --title "FAILED: Automated Tests($FAILURE_COUNT)" --body "$MSG"
           fi
