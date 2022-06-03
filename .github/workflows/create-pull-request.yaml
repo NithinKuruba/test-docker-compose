@@ -15,7 +15,7 @@ jobs:
 
       - name: Reset main branch
         run: |
-          git fetch origin main:main
+          git fetch origin test:test
 
       # Make changes to pull request here
 
