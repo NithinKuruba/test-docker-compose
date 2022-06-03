@@ -23,9 +23,7 @@ jobs:
               state: 'open'
             })
 
-            console.log(openPrs)
-
-            if(openPrs.length === 0){
+            if(openPrs.data.length === 0){
               await github.rest.pulls.create({
               title: 'Create Latest Release',
               owner,
@@ -38,4 +36,9 @@ jobs:
               ].join('\n\n'),
               draft: true
               });
+            } else {
+              console.log("There is already an open Pull Request in place.\n")
+              openPrs.data.forEach((item) => {
+                console.log(item.html_url)
+              })
             }
