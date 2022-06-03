@@ -1,0 +1,24 @@
+name: Create Issue
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Parse JSON and Create Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          FAILURE_COUNT=$(cat test-results.json | jq '.stats.failures')
+          if [[ "$FAILURE_COUNT" -gt 0 ]]; then
+            echo "Hello, the failure count is $FAILURE_COUNT"
+            FAILED_TESTS=$(cat test-results.json | jq '.results | .[] | .suites | .[].tests | .[] | select(.fail==false) | .title')
+            echo -e "$FAILED_TESTS\n\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" > msg
+            export MSG=$(cat msg)
+            gh issue create --title "FAILED: Automated Tests($FAILURE_COUNT)" --body "$MSG" --assignee "${{ github.actor }}"
+          fi
