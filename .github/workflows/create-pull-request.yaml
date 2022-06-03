@@ -15,7 +15,16 @@ jobs:
         with:
           script: |
             const { repo, owner } = context.repo;
-            const result = await github.rest.pulls.create({
+            const openPrs = await github.rest.pulls.list({
+              owner,
+              repo,
+              head: '${{ github.ref_name }}',
+              base: 'main',
+              state: open
+            })
+
+            if(openPrs.length === 0){
+              await github.rest.pulls.create({
               title: 'Create Latest Release',
               owner,
               repo,
@@ -24,6 +33,7 @@ jobs:
               body: [
                 'This Pull Request is auto-created by [actions/github-script](https://github.com/actions/github-script).',
                 'Please update this PR with appropriate labels to target specific type of release'
-              ].join('\n'),
+              ].join('\n\n'),
               draft: true
-            });
+              });
+            }
