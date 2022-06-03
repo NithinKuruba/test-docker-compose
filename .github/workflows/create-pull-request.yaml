@@ -10,12 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      # Make changes to pull request here
-
-      - name: Create Pull Request for Release
-        uses: peter-evans/create-pull-request@v4
+      - name: Create Pull Request
+        uses: actions/github-script@v6
         with:
-          branch: main
-          draft: true
-          title: Latest Release to Prod
+          script: |
+            const { repo, owner } = context.repo;
+            const openPrs = await github.rest.pulls.list({
+              owner,
+              repo,
+              head: '${{ github.ref_name }}',
+              base: 'main',
+              state: 'open'
+            })
+
+            if(openPrs.data.length === 0){
+              await github.rest.pulls.create({
+              title: 'Create Latest Release',
+              owner,
+              repo,
+              head: '${{ github.ref_name }}',
+              base: 'main',
+              body: [
+                'This Pull Request is auto-created by [actions/github-script](https://github.com/actions/github-script).',
+                'Please update this PR with appropriate labels to target specific type of release'
+              ].join('\n\n'),
+              draft: true
+              });
+            } else {
+              console.log("There is already an open Pull Request in place.\n")
+              openPrs.data.forEach((item) => {
+                console.log(item.html_url)
+              })
+            }
