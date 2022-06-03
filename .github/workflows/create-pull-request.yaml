@@ -18,5 +18,4 @@ jobs:
         with:
           branch: test
           base: main
-          draft: true
           title: Latest Release to Prod
