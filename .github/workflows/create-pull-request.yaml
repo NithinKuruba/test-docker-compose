@@ -16,5 +16,5 @@ jobs:
       - name: Create Pull Request for Release
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: main
+          base: main
           title: Latest Release to Prod
