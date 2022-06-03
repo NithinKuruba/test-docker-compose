@@ -23,6 +23,8 @@ jobs:
               state: 'open'
             })
 
+            console.log(openPrs)
+
             if(openPrs.length === 0){
               await github.rest.pulls.create({
               title: 'Create Latest Release',
