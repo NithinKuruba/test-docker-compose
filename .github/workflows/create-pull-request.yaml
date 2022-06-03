@@ -1,0 +1,21 @@
+name: Create Pull Request
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Make changes to pull request here
+
+      - name: Create Pull Request for Release
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: main
+          draft: true
+          title: Latest Release to Prod
