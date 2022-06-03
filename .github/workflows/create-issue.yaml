@@ -2,7 +2,7 @@ name: Create Issue
 
 on:
   push:
-    branches: ["main"]
+    branches: ["never"]
 
 jobs:
   cypress-run:

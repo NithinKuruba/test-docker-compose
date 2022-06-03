@@ -3,7 +3,7 @@ name: Build and Deploy Cypress and Execute Tests
 on:
   push:
     branches:
-      - "dev"
+      - "never"
 
 jobs:
   cypress-run:
